@@ -29,7 +29,8 @@ class question_answer:
    global data_directory,vm_name,app_name,search_engine,hot_key,ocr_engine,app_id,app_key,app_secret,api_version,hanwan_appcode,tz_value,token,header,url,textdir
    keyword = {} 
    browser = None
-   
+   browser2 = None
+
    
    def __init__(self):
        conf = configparser.ConfigParser()
@@ -65,7 +66,7 @@ class question_answer:
 #解析并搜索答案   
    def search_answer(self,keyword_r,type):
    
-      elem = self.browser.find_element_by_id("kw")  
+      elem = self.browser2.find_element_by_id("kw")  
       for k,v in keyword_r.items():
    
          elem.clear()
@@ -74,7 +75,7 @@ class question_answer:
          if type in k :
             elem.send_keys(keyword_r[k])
             elem.send_keys(Keys.RETURN)
-            time.sleep(1)
+            time.sleep(1.5)
             result = self.browser.find_element_by_class_name("nums")
             print('选项--------->' + keyword_r[k] + '<----------问题关联程度:')
             print(result.text)
@@ -350,7 +351,8 @@ if __name__ == "__main__":
     try:
         qa1.browser = webdriver.Chrome(r'.\tools\chromedriver.exe')
         qa1.browser.get(qa1.search_engine)
-
+        qa1.browser2 = webdriver.Chrome(r'.\tools\chromedriver.exe')
+        qa1.browser2.get(qa1.search_engine)
     except:
         print("chrome浏览器打开异常，可能是版本不对\n")
     

@@ -38,13 +38,14 @@ class question_answer:
    browser = None
    browser2 = None
 
-"""
 
-初始化变量
-
-配置文件config.ini
-
-"""
+#'''
+#
+#初始化变量
+#
+#配置文件config.ini
+#
+#'''
    def __init__(self):
        conf = configparser.ConfigParser()
        conf.read("config.ini")       
@@ -79,16 +80,16 @@ class question_answer:
 #解析并搜索答案
 
 
-"""
-
-调用浏览器搜索结果
-
-功能 : 调用浏览器 分别组合搜索 问题 和每个答案 并显示百度的关联结果数.
-
-参数1 : 包含问题及答案的词典,要求词典 key='question' 存储问题  key = 'answer1' 存储答案1 等
-参数2 : 答案key值的字符串,以便确认搜索哪个答案
-
-"""
+#"""
+#
+#调用浏览器搜索结果
+#
+#功能 : 调用浏览器 分别组合搜索 问题 和每个答案 并显示百度的关联结果数.
+#
+#参数1 : 包含问题及答案的词典,要求词典 key='question' 存储问题  key = 'answer1' 存储答案1 等
+#参数2 : 答案key值的字符串,以便确认搜索哪个答案
+#
+#"""
 
    def search_answer(self,keyword_r,type):
    
@@ -107,23 +108,23 @@ class question_answer:
             print('选项--------->' + keyword_r[k] + '<----------问题关联程度:')
             print(result.text)
 
-"""
-
-调用浏览器搜索结果
-
-功能 : 调用浏览器 单独搜索 问题 或 每个答案 .
-
-参数1 : 包含问题及答案的词典,要求词典 key='question' 存储问题  key = 'answer1' 存储答案1 等
-参数2 : key值的字符串,以便确认搜索问题/答案.
-参数3 : 
-type = 'question' nu = '0'  搜索问题  
-type = 'question' nu = '0'  一起搜索所有答案
-type = 'answer' nu = '1'  搜索答案1
-type = 'answer' nu = '2'  搜索答案2
-type = 'answer' nu = '3'  搜索答案3
-type = 'answer' nu = '4'  搜索答案4
-
-"""
+#"""
+#
+#调用浏览器搜索结果
+#
+#功能 : 调用浏览器 单独搜索 问题 或 每个答案 .
+#
+#参数1 : 包含问题及答案的词典,要求词典 key='question' 存储问题  key = 'answer1' 存储答案1 等
+#参数2 : key值的字符串,以便确认搜索问题/答案.
+#参数3 : 
+#type = 'question' nu = '0'  搜索问题  
+#type = 'question' nu = '0'  一起搜索所有答案
+#type = 'answer' nu = '1'  搜索答案1
+#type = 'answer' nu = '2'  搜索答案2
+#type = 'answer' nu = '3'  搜索答案3
+#type = 'answer' nu = '4'  搜索答案4
+#
+#"""
    
    def search_answer_2(self,keyword_r,type,nu):
    
@@ -144,14 +145,14 @@ type = 'answer' nu = '4'  搜索答案4
       elem.send_keys(Keys.RETURN)
 
 
-"""
-
-调用百度ocr识别图片中的问题及答案
-
-参数1 : 图片目录
-参数2 : 图片名字数组
-
-"""
+#"""
+#
+#调用百度ocr识别图片中的问题及答案
+#
+#参数1 : 图片目录
+#参数2 : 图片名字数组
+#
+#"""
    
    def query_ocr(self,directory,result_photo):
        keyword_result = {}
@@ -173,25 +174,25 @@ type = 'answer' nu = '4'  搜索答案4
              key_tmp = key_tmp + k
           self.keyword[k_p] = key_tmp
 
-"""
-
-去除字符串中[ ] " "  等字符后以","切割字符串
-样例 : ["CO","O₃","SO"]
-参数1 : 字符串
-
-返回 :  split切割后的数组
-
-"""
+#"""
+#
+#去除字符串中[ ] " "  等字符后以","切割字符串
+#样例 : ["CO","O₃","SO"]
+#参数1 : 字符串
+#
+#返回 :  split切割后的数组
+#
+#"""
    
    def get_answer(self,answer_key):
       return answer_key.strip('[').strip(']').strip('"').strip('"').split('","')   
 
 
-"""
-
-通过后台地址调用,调用api获得问题及答案,目前仅支持冲顶大会接口,将获得的结果存储至self.keyword词典
-
-"""
+#"""
+#
+#通过后台地址调用,调用api获得问题及答案,目前仅支持冲顶大会接口,将获得的结果存储至self.keyword词典
+#
+#"""
 
    def get_api_question_cd(self):
 
@@ -222,12 +223,12 @@ type = 'answer' nu = '4'  搜索答案4
                 break
              time.sleep(1)
              continue
-"""
-
-将question.txt中存储的内容复制到questionold.txt文件.
-
-
-"""
+#"""
+#
+#将question.txt中存储的内容复制到questionold.txt文件.
+#
+#
+#"""
    def copy_question(self):
        print("记录之前的问题")
        questiondir = os.path.join(self.textdir, 'question.txt')
@@ -242,11 +243,11 @@ type = 'answer' nu = '4'  搜索答案4
              f.writelines(quesfiletxt)
              f.writelines('\n')
           f.close()
-"""
-
-将当前keyword中当前的数据存储至question.txt文件
-
-"""
+#"""
+#
+#将当前keyword中当前的数据存储至question.txt文件
+#
+#"""
    def log_question(self):
        questiondir = os.path.join(self.textdir, 'question.txt')
        questiondirold = os.path.join(self.textdir, 'questionold.txt')
@@ -259,12 +260,12 @@ type = 'answer' nu = '4'  搜索答案4
        with open(questiondir, mode='w+', encoding='utf-8') as f:
           f.writelines(questionnew)
 
-"""
-
-通过屏幕截图+ocr识别问题及答案 并将结果存储至keyword
-
-
-"""
+#"""
+#
+#通过屏幕截图+ocr识别问题及答案 并将结果存储至keyword
+#
+#
+#"""
    def read_photo(self):
        self.keyword={}
        print('我来识别这个题目是啥!!!')
@@ -297,12 +298,12 @@ type = 'answer' nu = '4'  搜索答案4
 #       self.search_answer(self.keyword)
 
 
-"""
-
-通过api接口识别问题及答案 并将结果存储至keyword
-
-
-"""
+#"""
+#
+#通过api接口识别问题及答案 并将结果存储至keyword
+#
+#
+#"""
 
    def read_apiurl(self):
        self.keyword={}
@@ -324,11 +325,11 @@ type = 'answer' nu = '4'  搜索答案4
        else:
           print('未获取到问题')
 
-"""
-
-主控函数
-
-"""
+#"""
+#
+#主控函数
+#
+#"""
 
    def main(self):
 #       self.read_photo()
@@ -353,11 +354,11 @@ type = 'answer' nu = '4'  搜索答案4
        photo_capture(os.path.join(self.data_directory,testfile))
        image.getcolors()
 
-"""
-
-监控键盘输入
-
-"""       
+#"""
+#
+#监控键盘输入
+#
+#"""       
    def moni(self):
       while True:
          event = input('输入f/F载入问题,输入d/D查询问题与答案关联度,输入a/A开始查询答案,输入s/S开始查询问题，输入q/Q退出程序')
